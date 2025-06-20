@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Karate Timeline</title>
+    <style>
+      body, html { font-family: arial, sans-serif; font-size: 11pt; }
+      #visualization { box-sizing: border-box; width: 100%; height: 300px; }
+      .vis-item.failed { background-color: #F2928C; }
+      .page-heading { padding: 0.5em; margin-bottom: 0.5em; background-color: lightcyan; border: 1px solid gray; }
+    </style>
+    <script src="res/vis.min.js"></script>
+    <link href="res/vis.min.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="page-heading">
+      <a href="karate-summary.html">Summary</a>
+    </div>     
+    <div id="visualization"></div>
+    <script>
+var groups = [{"content":"Test worker","id":1}];
+var items = [{"id":1,"group":1,"content":"karate-test[1:9]","start":1750438522581,"end":1750438525302,"title":"karate-test[1:9] 11:55:22.581-11:55:25.302 Consultar todos los personajes"},{"id":2,"group":1,"content":"karate-test[2.1:24]","start":1750438525421,"end":1750438526804,"title":"karate-test[2.1:24] 11:55:25.421-11:55:26.804 Consultar personaje por id"},{"id":3,"group":1,"content":"karate-test[2.2:25]","start":1750438526826,"end":1750438528054,"title":"karate-test[2.2:25] 11:55:26.826-11:55:28.054 Consultar personaje por id"},{"id":4,"group":1,"content":"karate-test[2.3:26]","start":1750438528069,"end":1750438529428,"title":"karate-test[2.3:26] 11:55:28.069-11:55:29.428 Consultar personaje por id"},{"id":5,"group":1,"content":"karate-test[3:29]","start":1750438529443,"end":1750438530799,"title":"karate-test[3:29] 11:55:29.443-11:55:30.799 Crear un nuevo personaje"},{"id":6,"group":1,"content":"karate-test[4:37]","start":1750438530815,"end":1750438532100,"title":"karate-test[4:37] 11:55:30.815-11:55:32.100 Actualizar un personaje existente"},{"id":7,"group":1,"content":"karate-test[5:45]","start":1750438532110,"end":1750438533302,"title":"karate-test[5:45] 11:55:32.110-11:55:33.302 Eliminar un personaje"},{"id":8,"group":1,"content":"karate-test[6.1:59]","start":1750438533314,"end":1750438534509,"title":"karate-test[6.1:59] 11:55:33.314-11:55:34.509 Consultar personaje por id no existente"},{"id":9,"group":1,"content":"karate-test[6.2:60]","start":1750438534527,"end":1750438535721,"title":"karate-test[6.2:60] 11:55:34.527-11:55:35.721 Consultar personaje por id no existente"},{"id":10,"group":1,"content":"karate-test[6.3:61]","start":1750438535729,"end":1750438536913,"title":"karate-test[6.3:61] 11:55:35.729-11:55:36.913 Consultar personaje por id no existente"},{"id":11,"group":1,"content":"karate-test[7:64]","start":1750438536923,"end":1750438538118,"title":"karate-test[7:64] 11:55:36.923-11:55:38.118 Crear un nuevo personaje con nombre duplicado"},{"id":12,"group":1,"content":"karate-test[8:72]","start":1750438538135,"end":1750438539330,"title":"karate-test[8:72] 11:55:38.135-11:55:39.330 Crear un nuevo personaje con datos incompletos"},{"id":13,"group":1,"content":"karate-test[9:80]","start":1750438539340,"end":1750438540551,"title":"karate-test[9:80] 11:55:39.340-11:55:40.551 Actualizar un personaje no existente"},{"id":14,"group":1,"content":"karate-test[10:88]","start":1750438540562,"end":1750438541749,"title":"karate-test[10:88] 11:55:40.562-11:55:41.749 Eliminar un personaje no existente"}];
+</script>
+    <script>
+      var container = document.getElementById('visualization');
+      var timeline = new vis.Timeline(container);
+      timeline.setOptions({groupOrder: 'content'});
+      timeline.setGroups(new vis.DataSet(groups));
+      timeline.setItems(new vis.DataSet(items));
+    </script>
+  </body>
+</html>
