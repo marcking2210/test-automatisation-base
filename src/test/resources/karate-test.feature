@@ -28,7 +28,7 @@ Feature: Test de API súper simple
   @id:3 @createCharacter
   Scenario: Crear un nuevo personaje
     Given path "characters"
-    And request { "name": "Iron Marck13", "alterego": "Marco Jativa", "description": "Genius billionaire", "powers": ["Armor", "Flight"] }
+    And request { "name": "Iron Marck14", "alterego": "Marco Jativa", "description": "Genius billionaire", "powers": ["Armor", "Flight"] }
     When method post
     Then status 201
     * print response
@@ -43,7 +43,19 @@ Feature: Test de API súper simple
 
   @id:5 @deleteCharacter
   Scenario: Eliminar un personaje
-    Given path "characters", 639
+    Given path "characters", 644
     When method delete
     Then status 204
     * print response
+
+  @id:6 @getCharacterByIdNotFound
+  Scenario Outline: Consultar personaje por id no existente
+    Given path "characters", <id>
+    When method get
+    Then status 404
+    * print response
+    Examples:
+      | id |
+      | 9990  |
+      | 9980  |
+      | 9970  |
