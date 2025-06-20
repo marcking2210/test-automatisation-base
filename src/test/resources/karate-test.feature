@@ -21,14 +21,14 @@ Feature: Test de API súper simple
     * print response
     Examples:
       | id |
-      | 443  |
-      | 444  |
-      | 445  |
+      | 2008  |
+      | 2009  |
+      | 2266  |
 
   @id:3 @createCharacter
   Scenario: Crear un nuevo personaje
     Given path "characters"
-    And request { "name": "Iron Marck14", "alterego": "Marco Jativa", "description": "Genius billionaire", "powers": ["Armor", "Flight"] }
+    And request { "name": "Iron Marck85052", "alterego": "Marco Jativa", "description": "Genius billionaire", "powers": ["Armor", "Flight"] }
     When method post
     Then status 201
     * print response
@@ -43,12 +43,12 @@ Feature: Test de API súper simple
 
   @id:5 @deleteCharacter
   Scenario: Eliminar un personaje
-    Given path "characters", 644
+    Given path "characters", 2266
     When method delete
     Then status 204
     * print response
 
-  @id:6 @getCharacterByIdNotFound
+  @id:6 @getCharacterByIdNotExist
   Scenario Outline: Consultar personaje por id no existente
     Given path "characters", <id>
     When method get
@@ -59,3 +59,34 @@ Feature: Test de API súper simple
       | 9990  |
       | 9980  |
       | 9970  |
+
+  @id:7 @createCharacterAlreadyExist
+  Scenario: Crear un nuevo personaje con nombre duplicado
+    Given path "characters"
+    And request { "name": "Iron Marck", "alterego": "Marco Jativa", "description": "Genius billionaire", "powers": ["Armor", "Flight"] }
+    When method post
+    Then status 400
+    * print response
+
+  @id:8 @createCharacterRequiredFields
+  Scenario: Crear un nuevo personaje con datos incompletos
+    Given path "characters"
+    And request { "name": "", "alterego": "", "description": "", "powers": ["Armor", "Flight"] }
+    When method post
+    Then status 400
+    * print response
+
+  @id:9 @updateCharacterNotExist
+  Scenario: Actualizar un personaje no existente
+    Given path "characters", 9990
+    And request { "name": "Iron Marck10", "alterego": "Marco Jativa", "description": "Genius Multi billionaire", "powers": ["Armor", "Flight"] }
+    When method put
+    Then status 404
+    * print response
+
+  @id:10 @deleteCharacterNotExist
+  Scenario: Eliminar un personaje no existente
+    Given path "characters", 9990
+    When method delete
+    Then status 404
+    * print response
